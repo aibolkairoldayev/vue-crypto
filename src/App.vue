@@ -150,7 +150,7 @@
 </template>
 
 <script>
-import { subscribeToTicker, unsubscribefromTicker } from "./api.js";
+import { subscribeToTicker, unsubscribeFromTicker } from "./api.js";
 
 export default {
   name: "App",
@@ -249,6 +249,9 @@ export default {
       this.tickers
         .filter((t) => t.name === tickerName)
         .forEach((t) => {
+          if (t === this.selectedTicker) {
+            this.graph.push(price);
+          }
           t.price = price;
         });
     },
@@ -283,7 +286,7 @@ export default {
       if (this.selectedTicker === tickerId) {
         this.selectedTicker = null;
       }
-      unsubscribefromTicker(tickerId.name);
+      unsubscribeFromTicker(tickerId.name);
     },
   },
 
